@@ -59,12 +59,12 @@ INSERT INTO ksiegowosc.pracownicy VALUES
 (1, 'Anna', 'Agrafka', 'Nowa 10', 601601601),
 (2, 'Barbara', 'Biodeo', 'Rozowa 6', 601601602),
 (3, 'Cezary', 'Czapka', 'Rozana 1', 601601603),
-(4, 'Danuta', 'Dπb', 'Wroclawska 6', 601601604),
+(4, 'Danuta', 'D≈°b', 'Wroclawska 6', 601601604),
 (5, 'Eugeniusz', 'Bagno', 'Niebieska 5', 601601605),
 (6, 'Faustyna', 'Figarska', 'Czarna 4', 601601606),
 (7, 'Grzegorz', 'Zegarek', 'Bliska 1', 601601607),
-(8, 'Halina', 'K≥os', 'Daleka 1', 601601608),
-(9, 'Ignacy', 'DaszyÒski', 'Chmielowa 45', 601601609),
+(8, 'Halina', 'K≈Ços', 'Daleka 1', 601601608),
+(9, 'Ignacy', 'Daszy≈Ñski', 'Chmielowa 45', 601601609),
 (10, 'Justyna', 'Kowalik', 'Czarna 1', 601601610);
 
 INSERT INTO ksiegowosc.godziny VALUES
@@ -83,13 +83,13 @@ INSERT INTO ksiegowosc.pensja VALUES
 (1, 'szef', 8000),
 (2, 'zastepca szefa', 7000),
 (3, 'zastepca szefa', 7000),
-(4, 'ksiÍgowy', 5000),
+(4, 'ksiƒôgowy', 5000),
 (5, 'kasjer', 3000),
 (6, 'kasjer', 3000),
 (7, 'manager', 4500),
-(8, 'specjalista ds sprzedaøy', 4200),
-(9, 'staøysta', 3200),
-(10, 'staøysta', 3200);
+(8, 'specjalista ds sprzeda≈ºy', 4200),
+(9, 'sta≈ºysta', 3200),
+(10, 'sta≈ºysta', 3200);
 
 INSERT INTO ksiegowosc.premia VALUES
 (1, 'dobra praca', 800),
@@ -164,7 +164,7 @@ JOIN ksiegowosc.pensja pn ON pn.id_pensji = w.id_pensji
 ORDER BY pn.kwota
 --j
 SELECT p.imie, p.nazwisko, pn.kwota AS kwPensji, pr.kwota AS kwPremii 
---nowe nazwy kolumn co by nie by≥o 2x "kwota"
+--nowe nazwy kolumn co by nie by≈Ço 2x "kwota"
 FROM ksiegowosc.pracownicy p
 JOIN ksiegowosc.wynagrodzenie w ON w.id_pracownika=p.id_pracownika
 JOIN ksiegowosc.pensja pn ON pn.id_pensji = w.id_pensji

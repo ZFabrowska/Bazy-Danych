@@ -1,20 +1,20 @@
 USE AdventureWorks2022;
 
 --ZAD 1
--- tworzê funkcjê o dwóch argumentach INT, która zwraca INT
+-- tworzÃª funkcjÃª o dwÃ³ch argumentach INT, ktÃ³ra zwraca INT
 CREATE FUNCTION generacja_fibonacci(@first INT, @second INT)
 RETURNS INT
--- pocz¹tek funkcji
+-- poczÂ¹tek funkcji
 AS
 BEGIN
 	RETURN @first + @second;
 END;
 
--- tworzê procedurê o argumencie INT
+-- tworzÃª procedurÃª o argumencie INT
 CREATE PROCEDURE pisanie_Fibonacci (@n INT)
 AS
 BEGIN
---deklarujê pierwszy i drugi wyraz ci¹gu, iterator = 3, bo dwa pierwsze wyrazy s¹ ju¿ wygenerowane
+--deklarujÃª pierwszy i drugi wyraz ciÂ¹gu, iterator = 3, bo dwa pierwsze wyrazy sÂ¹ juÂ¿ wygenerowane
 	DECLARE @first INT;
 	DECLARE @second INT;
 	DECLARE @sum INT;
@@ -24,10 +24,10 @@ BEGIN
 	SET @iterator = 3;
 	PRINT @first;
 	PRINT @second;
-	-- pêtla while dzia³a dopóki iterator <=n
+	-- pÃªtla while dziaÂ³a dopÃ³ki iterator <=n
 	WHILE (@iterator <= @n)
 	BEGIN
-	-- dbo - odwo³anie do schematu gdzie jest szukana funkcja
+	-- dbo - odwoÂ³anie do schematu gdzie jest szukana funkcja
 		SET @sum = (SELECT dbo.generacja_Fibonacci(@first, @second));
 		PRINT @sum;
 		SET @first = @second;
@@ -36,14 +36,14 @@ BEGIN
 	END;
 END;
 
---wywo³anie procedury
+--wywoÂ³anie procedury
 EXEC pisanie_Fibonacci @n=10;
 
 
 
 
 --ZAD2
---trigger DML - aktywowany w odpowiedzi na update/insert. Po ich u¿yciu (after)
+--trigger DML - aktywowany w odpowiedzi na update/insert. Po ich uÂ¿yciu (after)
 CREATE TRIGGER duze
 ON Person.Person
 AFTER INSERT, UPDATE
@@ -51,24 +51,24 @@ AFTER INSERT, UPDATE
 AS
 BEGIN
 	UPDATE Person.Person 
-	-- zmiana na du¿e litery
+	-- zmiana na duÂ¿e litery
 	SET LastName = UPPER(LastName) 
 	FROM Person.Person
 END;
---wyœwietlenie tabeli
+--wyÅ“wietlenie tabeli
 SELECT * FROM Person.Person;
 
---tabela ma klucze zewnêtrzne. Mg albo usun¹æ ten klucz albo dodaæ odpowiedni rekord do BusinessEntity.
---"operacja INSERT, dodaje wiersz do tabeli, wstawiaj¹c nowy identyfikator globalnie unikatowy (GUID) wygenerowany przez funkcjê NEWID().
+--tabela ma klucze zewnÃªtrzne. Mg albo usunÂ¹Ã¦ ten klucz albo dodaÃ¦ odpowiedni rekord do BusinessEntity.
+--"operacja INSERT, dodaje wiersz do tabeli, wstawiajÂ¹c nowy identyfikator globalnie unikatowy (GUID) wygenerowany przez funkcjÃª NEWID().
 INSERT INTO Person.BusinessEntity(rowguid)
 VALUES(NEWID());
 
---dodanie czegoœ do Person.Person ¿eby aktywowaæ trigger
+--dodanie czegoÅ“ do Person.Person Â¿eby aktywowaÃ¦ trigger
 INSERT INTO Person.Person (BusinessEntityID, PersonType, NameStyle, Title, FirstName, MiddleName, LastName, Suffix, 
 	EmailPromotion, AdditionalContactInfo, ModifiedDate)
 VALUES (20778, 'IN', 0, 'NULL', 'anna', 'izabela', 'lecka', NULL, 1, NULL, 2008-01-24);
 
---sprawdzenie ¿e trigger zadzia³a³
+--sprawdzenie Â¿e trigger zadziaÂ³aÂ³
 SELECT * FROM Person.Person WHERE BusinessEntityID = 20778;
 
 
@@ -83,17 +83,17 @@ AS
 BEGIN
 	DECLARE @newTax FLOAT;
 	DECLARE @oldTax FLOAT;
-	-- przypisanie starej i nowej wartoœci z rekordu odpowiednim zmiennym
+	-- przypisanie starej i nowej wartoÅ“ci z rekordu odpowiednim zmiennym
 	SELECT @newTax = TaxRate FROM INSERTED;
 	SELECT @oldTax =TaxRate FROM DELETED;
-	--warunek if do printowania b³êdu
+	--warunek if do printowania bÂ³Ãªdu
 	IF (@newTax > 1.3 * @oldTax OR @newTax < 0.7 * @oldTax)
 	PRINT 'Change in Tax is bigger than 30%'
 END;
 
---zmiana rekordu dla SalesTaxRateID=1 ¿eby sprawdziæ czy dzia³a
+--zmiana rekordu dla SalesTaxRateID=1 Â¿eby sprawdziÃ¦ czy dziaÂ³a
 UPDATE Sales.SalesTaxRate 
 SET TaxRate = 1 
 WHERE SalesTaxRateID = 1;
---wyœwietlenie tego¿ rekordu
+--wyÅ“wietlenie tegoÂ¿ rekordu
 SELECT * FROM Sales.SalesTaxRate WHERE SalesTaxRateID=1;

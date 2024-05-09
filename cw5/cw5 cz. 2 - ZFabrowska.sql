@@ -10,7 +10,7 @@ AVG(kwota) AS srednia_placa,
 MIN(kwota) AS min_placa,
 MAX(kwota) AS max_placa
 FROM ksiegowosc.pensja
-WHERE stanowisko = 'staøysta';
+WHERE stanowisko = 'sta≈ºysta';
 
 --m
 SELECT

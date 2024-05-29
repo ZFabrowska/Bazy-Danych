@@ -84,7 +84,7 @@ IF EXISTS (SELECT * FROM Sales.SalesOrderDetail WHERE OrderQty = 0)
 ELSE
 	BEGIN
 		UPDATE Sales.SalesOrderDetail
-		SET OrderQty = OrderQty - 1
+		SET OrderQty = OrderQty + 1
 		PRINT 'transakcja wykonana'
 		COMMIT;
 	END;
